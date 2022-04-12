@@ -17,12 +17,12 @@ export default function Home() {
         <title>Index Page</title>
       </Head>
       <Header />
-      <a
+      {/* <a
         href="/about"
         onClick={handleClick}
       >
         About
-      </a>
+      </a> */}
       {/* <button
         onClick={(e) => {
           // e.preventDefault()
