@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import classes from './Footer.module.css'
 
 export const Footer = () => {
@@ -11,7 +10,7 @@ export const Footer = () => {
       >
         Thanks by{' '}
         <span className={classes.logo}>
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+          <img src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
         </span>
       </a>
     </footer>
