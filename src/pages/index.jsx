@@ -8,11 +8,23 @@ import { useCallback } from "react";
 
 export default function Home() {
   const [count, setCount] = useState(1)
+  const [text, setText] = useState("")
+  const [isShow, setIsShow] = useState(true)
+
   const handleClick = useCallback(() => {
     if (count < 10) {
       setCount(count => count + 1)
     }
   }, [count]);
+
+  const handleDisplay = () => {
+    setIsShow((isShow) => !isShow)
+  }
+
+  const handleChange = useCallback((e) => {
+    console.log(e.target.value);
+    setText(e.target.value.trim())
+  }, [])
 
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
@@ -27,7 +39,11 @@ export default function Home() {
         <title>Index Page</title>
       </Head>
       <Header />
-      <h1>{count}</h1>
+      <div>
+        <button onClick={handleDisplay}>{ isShow ? "非表示" : "表示" }</button>
+      </div>
+      <input type="text" value={text} onChange={handleChange} />
+      <h1>{ isShow ? count : null}</h1>
       <button onClick={handleClick}>Button</button>
       <Main title="index" />
       <Footer />
