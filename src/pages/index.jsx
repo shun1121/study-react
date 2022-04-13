@@ -10,6 +10,7 @@ export default function Home() {
   const [count, setCount] = useState(1)
   const [text, setText] = useState("")
   const [isShow, setIsShow] = useState(true)
+  const [array, setArray] = useState([])
 
   const handleClick = useCallback(() => {
     if (count < 10) {
@@ -20,6 +21,18 @@ export default function Home() {
   const handleDisplay = useCallback(() => {
     setIsShow((prevIsShow) => !prevIsShow)
   }, [])
+
+  // useCallbackの第二引数がから配列のままだと、この関数は一回しか生成されない。
+  // 第二引数に値を入れることで、それが更新されるたびにこの関数が生成される。
+  const handleAdd = useCallback(() => {
+    setArray((prevArray) => {
+      if (prevArray.some((item) => item === text)) {
+        alert("cannot use add the used text")
+        return prevArray
+      }
+      return [...prevArray, text]
+    })
+  }, [text])
 
   const handleChange = useCallback((e) => {
     console.log(e.target.value);
@@ -45,6 +58,16 @@ export default function Home() {
       <input type="text" value={text} onChange={handleChange} />
       <h1>{ isShow ? count : null}</h1>
       <button onClick={handleClick}>Button</button>
+      <div>
+        <button onClick={handleAdd}>Add</button>
+      </div>
+      <ul>
+        {array.map((item) => {
+          return (
+            <li key={item}>{item}</li>
+          )
+        })}
+      </ul>
       <Main title="index" />
       <Footer />
     </div>
